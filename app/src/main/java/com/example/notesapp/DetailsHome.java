@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,6 +35,7 @@ public class DetailsHome extends AppCompatActivity {
     }
 
     private void proseccinsert() {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         String title = ed1.getText().toString().trim();
         String details = ed2.getText().toString().trim();
 
@@ -41,8 +44,9 @@ public class DetailsHome extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference node = db.getReference("notes");
 
-        int no=4;
-        node.child("s").setValue(md);
+        //int no=1;
+        node.child(account.getId()).push().setValue(md);
+        //no++;
 
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
 

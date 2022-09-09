@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recview = (RecyclerView) findViewById(R.id.recview);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         recview.setLayoutManager(new GridLayoutManager(this,2));
         fab = (FloatingActionButton) findViewById(R.id.fadd);
 
+
         FirebaseRecyclerOptions<model> options =
                 new FirebaseRecyclerOptions.Builder<model>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference("notes"), model.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference("notes").child(account.getId()), model.class)
                         .build();
         adapter = new myadapter(options);
         recview.setAdapter(adapter);
