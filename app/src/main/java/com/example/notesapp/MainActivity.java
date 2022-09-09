@@ -1,6 +1,7 @@
 package com.example.notesapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recview = (RecyclerView) findViewById(R.id.recview);
-        recview.setLayoutManager(new LinearLayoutManager(this));
+        recview.setLayoutManager(new GridLayoutManager(this,2));
         fab = (FloatingActionButton) findViewById(R.id.fadd);
 
         FirebaseRecyclerOptions<model> options =
