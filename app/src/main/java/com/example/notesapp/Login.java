@@ -43,6 +43,8 @@ public class Login extends AppCompatActivity {
         //updateUI(currentUser);
         if(currentUser!=null)
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
+
     }
     // [END on_start_check_user]
     @Override
@@ -117,6 +119,7 @@ public class Login extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(getApplicationContext(),"sign in ",Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
 
                         } else {
                             // If sign in fails, display a message to the user.

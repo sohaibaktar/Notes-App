@@ -58,4 +58,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         adapter.stopListening();
     }
+
+    @Override
+    public void onBackPressed() {
+        //finish();
+        super.onBackPressed();
+    }
 }

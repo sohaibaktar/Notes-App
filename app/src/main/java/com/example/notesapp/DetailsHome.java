@@ -49,6 +49,7 @@ public class DetailsHome extends AppCompatActivity {
         //no++;
 
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
 
     }
 }
