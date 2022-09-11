@@ -27,7 +27,15 @@ public class DetailsHome extends AppCompatActivity {
         btn = findViewById(R.id.save_btn);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        ed1.setText(account.getEmail());
+//        Intent intent = getIntent();
+//        String get_title = intent.getStringExtra("get_title");
+//        String get_details = intent.getStringExtra("get_details");
+//
+//        if(intent!=null){
+//            ed1.setText(get_title);
+//            ed2.setText(get_details);
+//        }
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
