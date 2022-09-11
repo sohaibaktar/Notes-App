@@ -3,4 +3,7 @@
     <string name="title_details_allnotes">Title details allnotes</string>
     <string name="title_name">Title Name</string>
     <string name="save">save</string>
+    <string name="opennav">open navigation view</string>
+    <string name="closednav">closed navigation view</string>
+    <string name="header_image">header Image</string>
 </resources>

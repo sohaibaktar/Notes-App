@@ -26,6 +26,8 @@ public class DetailsHome extends AppCompatActivity {
         ed2 = findViewById(R.id.textdetails);
         btn = findViewById(R.id.save_btn);
 
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        ed1.setText(account.getEmail());
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,9 +46,8 @@ public class DetailsHome extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference node = db.getReference("notes");
 
-        //int no=1;
         node.child(account.getId()).push().setValue(md);
-        //no++;
+
 
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
         finish();

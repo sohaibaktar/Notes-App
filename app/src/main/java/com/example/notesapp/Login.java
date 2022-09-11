@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
         //updateUI(currentUser);
         if(currentUser!=null)
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        finish();
+            //finish();
 
     }
     // [END on_start_check_user]
