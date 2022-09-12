@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,8 +31,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewholder> {
 
@@ -123,9 +128,31 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            holder.cardView
+                    .setCardBackgroundColor(holder.itemView.getResources()
+                            .getColor(getRandomcolor(),null));
+        }
 
     }
 
+    private int getRandomcolor() {
+
+        List<Integer> colorcode = new ArrayList<>();
+        colorcode.add(R.color.c1);
+        colorcode.add(R.color.c2);
+        colorcode.add(R.color.c3);
+        colorcode.add(R.color.c4);
+        colorcode.add(R.color.c5);
+        colorcode.add(R.color.c6);
+        colorcode.add(R.color.c7);
+        colorcode.add(R.color.c8);
+        colorcode.add(R.color.purple_200);
+
+        Random randomcolor = new Random();
+        int number = randomcolor.nextInt(colorcode.size());
+        return colorcode.get(number);
+    }
 
 
     @NonNull
@@ -137,6 +164,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 
     class myviewholder extends RecyclerView.ViewHolder{
 
+        CardView cardView;
         TextView t1,t2,txt_option;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -144,6 +172,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
             t1 = (TextView) itemView.findViewById(R.id.title);
             t2 = (TextView) itemView.findViewById(R.id.details);
             txt_option = (TextView) itemView.findViewById(R.id.txt_option);
+            cardView = (CardView) itemView.findViewById(R.id.single_card);
         }
     }
 }

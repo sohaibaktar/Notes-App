@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/single_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="15sp"
     app:cardCornerRadius="20dp">
 
     <TextView
+        android:id="@+id/txt_option"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:text="&#8942;"
-        android:textSize="20sp"
-        android:id="@+id/txt_option"
         android:layout_gravity="right"
+        android:text="&#8942;"
         android:textAlignment="center"
+        android:textSize="20sp"
         tools:ignore="RtlCompat" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,9 +29,12 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:text="@string/title_name"
 
             />
+
         <TextView
             android:id="@+id/details"
             android:layout_width="wrap_content"
@@ -37,8 +42,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/title_details_allnotes"
 
-            android:textColor="?android:attr/textColorSecondary"
-            />
+            android:textColor="?android:attr/textColorSecondary" />
 
 
     </LinearLayout>
