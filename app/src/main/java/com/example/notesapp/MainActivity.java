@@ -3,6 +3,7 @@ package com.example.notesapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     //header
     TextView profile_name;
     ImageView profile_img;
+    //searchView
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         profile_name = (TextView) nav.getHeaderView(0).findViewById(R.id.header_name);
         profile_img = (ImageView) nav.getHeaderView(0).findViewById(R.id.header_pimage);
+        searchView = (SearchView) findViewById(R.id.search_view);
+        searchView.clearFocus();
 
         setSupportActionBar(toolbar);
         //drawer clodes and opened
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         //firebase
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //header work
-        profile_name.setText(account.getEmail());
+        profile_name.setText(account.getDisplayName());
         Glide.with(this).load(account.getPhotoUrl()).into(profile_img);
 
         //menu work
@@ -114,7 +120,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //searching work
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchtext(newText);
+                return false;
+            }
+        });
     }
+
+    private void searchtext(String newText) {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        FirebaseRecyclerOptions<model> options =
+                new FirebaseRecyclerOptions.Builder<model>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("notes")
+                        .child(account.getId()).orderByChild("details")
+                        .startAt(newText).endAt(newText+"\uf8ff"), model.class)
+                        .build();
+
+        adapter=new myadapter(options);
+        adapter.startListening();
+        recview.setAdapter(adapter);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -132,4 +166,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onBackPressed();
     }
+
+
 }
